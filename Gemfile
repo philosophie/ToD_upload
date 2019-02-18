@@ -14,6 +14,7 @@ gem 'pg', '~> 1.1.4'
 gem 'rack-canonical-host', '~> 0.2.3'
 gem 'react_on_rails', '11.1.4'
 gem 'recipient_interceptor', '~> 0.2.0'
+gem "roo", "~> 2.8.0"
 gem 'sass-rails', '~> 5.0.7'
 gem 'sidekiq', '~> 5.2.5'
 gem 'simple_form', '~> 4.1.0'

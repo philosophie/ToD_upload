@@ -1,11 +1,11 @@
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 
-export default class Spreadsheet extends Component {
+export default class Test extends Component {
   render() {
     return (
       <div>
-        <h3>Spreadsheet</h3>
+        <h3>Test</h3>
       </div>
     );
   }

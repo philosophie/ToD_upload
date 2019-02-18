@@ -1,3 +1,8 @@
 Rails.application.routes.draw do
-  get 'upload', to: 'spreadsheet#upload'
+  resources :tests, only: [:show] do
+    collection do
+      get :upload
+      post :import
+    end
+  end
 end
