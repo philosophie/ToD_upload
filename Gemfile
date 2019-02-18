@@ -20,6 +20,7 @@ gem 'simple_form', '~> 4.1.0'
 gem 'title', '~> 0.0.7'
 gem 'uglifier', '~> 4.1.20'
 gem 'puma', '~> 3.12.0'
+gem 'webpacker', '~> 3.5'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-jquery', '~> 3.3.1'
@@ -53,3 +54,5 @@ group :test do
   gem 'shoulda-matchers', '~> 4.0.0', require: false
   gem 'timecop', '~> 0.9.1'
 end
+
+gem 'mini_racer', platforms: :ruby
