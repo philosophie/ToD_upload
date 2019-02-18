@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :tests, only: [:show] do
+  resources :tests do
     collection do
       get :upload
       post :import
