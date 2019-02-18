@@ -1,0 +1,21 @@
+# Logfile created on 2019-02-18 06:09:00 -0500 by logger.rb/56815
+[2019-02-18 06:09:00 -0500 Nours-MacBook-Pro.local (20645)] INFO : Starting the New Relic agent version 6.0.0.351 in "development" environment.
+[2019-02-18 06:09:00 -0500 Nours-MacBook-Pro.local (20645)] INFO : To prevent agent startup add a NEW_RELIC_AGENT_ENABLED=false environment variable or modify the "development" section of your newrelic.yml.
+[2019-02-18 06:09:00 -0500 Nours-MacBook-Pro.local (20645)] WARN : No configuration file found. Working directory = /Users/nour/.Trash/ToD_upload 6.04.59 AM/ToD_upload
+[2019-02-18 06:09:00 -0500 Nours-MacBook-Pro.local (20645)] WARN : Looked in these locations (based on defaults): /Users/nour/.Trash/ToD_upload 6.04.59 AM/ToD_upload/config/newrelic.yml, /Users/nour/.Trash/ToD_upload 6.04.59 AM/ToD_upload/newrelic.yml, /Users/nour/.Trash/ToD_upload 6.04.59 AM/ToD_upload/config/newrelic.yml, /Users/nour/.Trash/ToD_upload 6.04.59 AM/ToD_upload/newrelic.yml, /Users/nour/.newrelic/newrelic.yml, /Users/nour/newrelic.yml
+[2019-02-18 06:09:00 -0500 Nours-MacBook-Pro.local (20645)] INFO : Environment: development
+[2019-02-18 06:09:00 -0500 Nours-MacBook-Pro.local (20645)] INFO : No known dispatcher detected.
+[2019-02-18 06:09:00 -0500 Nours-MacBook-Pro.local (20645)] INFO : Application: development
+[2019-02-18 06:09:00 -0500 Nours-MacBook-Pro.local (20645)] WARN : No license key found. This often means your newrelic.yml file was not found, or it lacks a section for the running environment, 'development'. You may also want to try linting your newrelic.yml to ensure it is valid YML.
+[2019-02-18 06:09:01 -0500 Nours-MacBook-Pro.local (20645)] INFO : Installing ActiveRecord 5 instrumentation
+[2019-02-18 06:09:01 -0500 Nours-MacBook-Pro.local (20645)] INFO : Installing Redis Instrumentation
+[2019-02-18 06:09:01 -0500 Nours-MacBook-Pro.local (20645)] INFO : Installing Sidekiq instrumentation
+[2019-02-18 06:09:01 -0500 Nours-MacBook-Pro.local (20645)] INFO : Installing Rails 3+ middleware instrumentation
+[2019-02-18 06:09:01 -0500 Nours-MacBook-Pro.local (20645)] INFO : Installing Net instrumentation
+[2019-02-18 06:09:01 -0500 Nours-MacBook-Pro.local (20645)] INFO : Installing deferred Rack::Builder instrumentation
+[2019-02-18 06:09:01 -0500 Nours-MacBook-Pro.local (20645)] INFO : Installing Rack::Builder middleware instrumentation
+[2019-02-18 06:09:01 -0500 Nours-MacBook-Pro.local (20645)] INFO : Installing ActiveJob instrumentation
+[2019-02-18 06:09:01 -0500 Nours-MacBook-Pro.local (20645)] INFO : Installing Rails 5 Controller instrumentation
+[2019-02-18 06:09:01 -0500 Nours-MacBook-Pro.local (20645)] INFO : Installing Rails 5 view instrumentation
+[2019-02-18 06:09:01 -0500 Nours-MacBook-Pro.local (20645)] INFO : Installing Rails 5 Action Cable instrumentation
+[2019-02-18 06:09:01 -0500 Nours-MacBook-Pro.local (20645)] INFO : Finished instrumentation
