@@ -3,6 +3,10 @@
 class TestsController < ApplicationController
   def import
     test = Test.new.import(params[:file])
-    binding.pry
+    @test_props = {
+      pageTitle: test[:titles][0][0],
+      data: [test[:header]] + test[:data],
+      numberOfSampleColumns: test[:number_of_sample_columns]
+    }
   end
 end
