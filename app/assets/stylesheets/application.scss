@@ -1,1 +1,12 @@
 @charset "utf-8";
+@import "react-datasheet";
+
+.sample-data-column-header {
+  color: white;
+  background-color: rgb(121, 25, 27) !important;
+}
+
+.test-data-column-header {
+  color: white;
+  background-color: rgb(218, 105, 28) !important;
+}
