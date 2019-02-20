@@ -12,11 +12,13 @@ class Test < ApplicationRecord
   end
 
   def import(file)
-    @spreadsheet = Roo::Spreadsheet.open(file.path)
+    @spreadsheet = Roo::Excelx.new(file.path)
     find_title_rows
     find_header_row
     find_data_rows
-    @number_of_sample_columns = filter(@data_rows.first).length
+    @number_of_sample_columns = filter(
+      @data_rows.first.map { |c| c[:value] }
+    ).length
     test_map
   end
 
@@ -34,14 +36,22 @@ class Test < ApplicationRecord
     header_row.each_with_index do |content, index|
       @empty_column_indexes << index if content.nil? || content.strip == ''
     end
-    @header_row = remove_empty_columns(header_row)
+    @header_row = remove_empty_columns(header_row).map {|c| {value: c}}
   end
 
   def find_data_rows
+    rows = @spreadsheet.each_row_streaming.map { |r| r }
     (@title_rows.length + 2..@spreadsheet.last_row).each do |i|
       data_row = remove_empty_columns(@spreadsheet.row(i))
       break if data_row.reject(&:nil?).empty?
-
+      data_row = data_row.map do |cell|
+        cell_info = rows[i-1].select {|c| c.value == cell}[0]
+        if cell_info.formula
+          {isFormula: true, value: cell_info.formula}
+        else
+          {value: cell}
+        end
+      end
       @data_rows << data_row
     end
   end

@@ -22,27 +22,17 @@ export default class Test extends Component {
             element.indexOf(cell) < numberOfSampleColumns
           ) {
             firstRow.push(
-              Object.assign(
-                {},
-                { value: cell, className: "sample-data-column-header" }
-              )
+              Object.assign(cell, { className: "sample-data-column-header" })
             );
           } else {
             firstRow.push(
-              Object.assign(
-                {},
-                { value: cell, className: "test-data-column-header" }
-              )
+              Object.assign(cell, { className: "test-data-column-header" })
             );
           }
         });
         table.push(firstRow);
       } else {
-        const row = [];
-        element.forEach(function(cell) {
-          row.push(Object.assign({}, { value: cell }));
-        });
-        table.push(row);
+        table.push(element);
       }
     });
     return table;
