@@ -37,6 +37,16 @@ export default class Test extends Component {
     });
     return table;
   };
+
+  onCellsChanged = changes => {
+    const that = this;
+    debugger;
+    const data = this.state.data.map(row => [...row]);
+    changes.forEach(({ cell, row, col, value }) => {
+      data[row][col] = { ...data[row][col], value };
+    });
+    this.setState({ data });
+  };
   render() {
     return (
       <div>
@@ -44,13 +54,7 @@ export default class Test extends Component {
         <ReactDataSheet
           data={this.state.data}
           valueRenderer={cell => cell.value}
-          onCellsChanged={changes => {
-            const data = this.state.data.map(row => [...row]);
-            changes.forEach(({ cell, row, col, value }) => {
-              data[row][col] = { ...data[row][col], value };
-            });
-            this.setState({ data });
-          }}
+          onCellsChanged={this.onCellsChanged}
         />
       </div>
     );

@@ -6,7 +6,8 @@ class TestsController < ApplicationController
     @test_props = {
       pageTitle: test[:titles][0][0],
       data: [test[:header]] + test[:data],
-      numberOfSampleColumns: test[:number_of_sample_columns]
+      numberOfSampleColumns: test[:number_of_sample_columns],
+      columnsMap: test[:columns_map]
     }
   end
 end
