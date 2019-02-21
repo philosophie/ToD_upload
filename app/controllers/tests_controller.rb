@@ -7,7 +7,8 @@ class TestsController < ApplicationController
       pageTitle: test[:titles][0][0],
       data: [test[:header]] + test[:data],
       numberOfSampleColumns: test[:number_of_sample_columns],
-      columnsMap: test[:columns_map]
+      columnsMap: test[:columns_map],
+      rowOffset: test[:row_offset]
     }
   end
 end
