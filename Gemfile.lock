@@ -41,13 +41,13 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.6.0)
       public_suffix (>= 2.0.2, < 4.0)
-    airbrake (8.1.2)
+    airbrake (8.1.4)
       airbrake-ruby (~> 3.2)
-    airbrake-ruby (3.2.4)
+    airbrake-ruby (3.2.5)
       rbtree3 (~> 0.5)
     arel (7.1.4)
     ast (2.4.0)
-    autoprefixer-rails (9.4.7)
+    autoprefixer-rails (9.4.8)
       execjs
     better_errors (2.5.1)
       coderay (>= 1.0.0)
@@ -116,7 +116,7 @@ GEM
       rainbow (>= 2.2.2, < 4.0)
       terminal-table (>= 1.5.1)
     jaro_winkler (1.5.2)
-    json (2.1.0)
+    json (2.2.0)
     launchy (2.4.3)
       addressable (~> 2.3)
     libv8 (6.7.288.46.1)
@@ -241,6 +241,9 @@ GEM
       ruby-progressbar (~> 1.7)
       unicode-display_width (~> 1.4.0)
     ruby-progressbar (1.10.0)
+    rubyXL (3.3.33)
+      nokogiri (>= 1.4.4)
+      rubyzip (>= 1.1.6)
     ruby_dep (1.5.0)
     rubyzip (1.2.2)
     sass (3.7.3)
@@ -337,6 +340,7 @@ DEPENDENCIES
   rspec-rails (~> 3.8.2)
   rspec-sidekiq (~> 3.0.3)
   rubocop (~> 0.64.0)
+  rubyXL (~> 3.3.33)
   sass-rails (~> 5.0.7)
   shoulda-matchers (~> 4.0.0)
   sidekiq (~> 5.2.5)
@@ -353,4 +357,4 @@ RUBY VERSION
    ruby 2.4.0p0
 
 BUNDLED WITH
-   1.16.6
+   1.17.3
