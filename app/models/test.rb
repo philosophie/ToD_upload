@@ -63,8 +63,14 @@ class Test < ApplicationRecord
       empty_cells_counter = 0
       i = i + 1
     end
-    @header_rows = header_rows.map do |row|
-      remove_empty_columns(row).map { |c| { value: c } }
+    @header_rows = header_rows.map { |row| remove_empty_columns(row) }
+    @header_rows = @header_rows.map do |row|
+      row.map do |cell|
+        {
+          value: cell,
+          className: row.index(cell) < @number_of_sample_columns? "sample-data-column-header" : "test-data-column-header"
+        }
+      end
     end
     deletion_map = {}
     @header_rows.each_with_index do |row, row_index|

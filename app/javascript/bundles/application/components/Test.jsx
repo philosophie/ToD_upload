@@ -58,32 +58,10 @@ export default class Test extends Component {
 
   setData = () => {
     const table = [];
-    const { data, numberOfSampleColumns } = this.props;
+    const { data } = this.props;
     const { processFormula } = this;
-    data.forEach(function(element) {
-      if (data.indexOf(element) === 0) {
-        const firstRow = [];
-        element.forEach(function(cell) {
-          if (
-            element.indexOf(cell) >= 0 &&
-            element.indexOf(cell) < numberOfSampleColumns
-          ) {
-            firstRow.push(
-              Object.assign(cell, { className: "sample-data-column-header" })
-            );
-          } else {
-            firstRow.push(
-              Object.assign(cell, { className: "test-data-column-header" })
-            );
-          }
-        });
-        table.push(firstRow);
-      } else {
-        table.push(element);
-      }
-    });
     const formulaCells = [];
-    table.forEach(function(row, row_index) {
+    data.forEach(function(row, row_index) {
       row.forEach(function(cell, cell_index) {
         if (cell["isFormula"]) {
           formulaCells.push(new Array(row_index, cell_index));
@@ -91,7 +69,7 @@ export default class Test extends Component {
       });
     });
     this.setState({
-      data: table,
+      data,
       formulaCells
     });
   };
