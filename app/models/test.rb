@@ -66,6 +66,68 @@ class Test < ApplicationRecord
     @header_rows = header_rows.map do |row|
       remove_empty_columns(row).map { |c| { value: c } }
     end
+    deletion_map = {}
+    @header_rows.each_with_index do |row, row_index|
+    	row.each_with_index do |cell, cell_index|
+    		row_span = 1
+    		row_counter = 1
+    		if cell[:value]
+    			until row_index + row_counter == @header_rows.length
+    				if @header_rows[row_index + row_counter][cell_index][:value] == nil
+    					row_span = row_span + 1
+    					row_counter = row_counter + 1
+    				else
+    					break
+    				end
+    			end
+    			@header_rows[row_index][cell_index][:rowSpan] = row_span
+    			(row_index + 1..row_span - 1).each do |i|
+            if deletion_map[i]
+              deletion_map[i] = deletion_map[i].push(cell_index)
+            else
+              deletion_map[i] = [cell_index]
+            end
+    			end
+    		end
+    	end
+    end
+    @header_rows_copy = @header_rows.map {|x| x}
+    deletion_map.keys.each do |row_index|
+      @header_rows[row_index] = @header_rows[
+        row_index
+      ].reject.with_index do |_x, cell_index|
+        deletion_map[row_index].include?(cell_index)
+      end
+    end
+    @header_rows.each_with_index do |row, row_index|
+    	row.each_with_index do |cell, cell_index|
+    		column_span = 1
+    		column_counter = 1
+    		if cell[:value]
+    			until cell_index + column_counter == @header_rows[row_index].length
+    				if @header_rows[row_index][cell_index + column_counter][:value] == nil
+    					column_span = column_span + 1
+    					column_counter = column_counter + 1
+              unless row_index == 0 || cell_index + column_span + 1 >= @header_rows[row_index].length
+                index_check = @header_rows_copy[row_index].index(cell) + column_span
+                if @header_rows[row_index - 1][index_check][:rowSpan] &&
+                   @header_rows[row_index - 1][index_check][:rowSpan] > 1
+                   break
+                end
+              end
+    				else
+    					break
+    				end
+    			end
+    			@header_rows[row_index][cell_index][:colSpan] = column_span
+    		end
+    	end
+    end
+    @header_rows = @header_rows.map do |row|
+      row.select do |content|
+        !content[:value].nil? && content[:value].to_s.strip != ''
+      end
+    end
   end
 
   def find_data_rows
