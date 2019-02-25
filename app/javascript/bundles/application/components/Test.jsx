@@ -5,6 +5,7 @@ import ReactDataSheet from "react-datasheet";
 export default class Test extends Component {
   constructor(props) {
     super(props);
+    debugger;
     this.state = {
       data: [],
       formulaCells: []

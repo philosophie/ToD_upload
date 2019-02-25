@@ -6,14 +6,13 @@ class Test < ApplicationRecord
     super(args)
     @spreadsheet = nil
     @title_rows = []
-    @header_row = nil
+    @header_rows = []
     @empty_column_indexes = []
     @data_rows = []
-    @number_of_sample_columns = 0
     @column_offset = 0
     @row_offset = 0
-    @samples_columns_counter = 1
-    @samples_rows_counter = 1
+    @number_of_sample_columns = 1
+    @header_rows_length = 1
   end
 
   def import(file)
@@ -22,19 +21,15 @@ class Test < ApplicationRecord
     parsed_for_colors = RubyXL::Parser.parse(file.path)[0]
     find_title_rows
     samples_color = parsed_for_colors[@row_offset][@spreadsheet.first_column].fill_color
-    while parsed_for_colors[@row_offset][@samples_columns_counter + 1].fill_color == samples_color
-      @samples_columns_counter = @samples_columns_counter + 1
+    while parsed_for_colors[@row_offset][@number_of_sample_columns + 1].fill_color == samples_color
+      @number_of_sample_columns = @number_of_sample_columns + 1
     end
-    while parsed_for_colors[@row_offset + @samples_rows_counter][@spreadsheet.first_column].fill_color == samples_color
-      @samples_rows_counter = @samples_rows_counter + 1
+    while parsed_for_colors[@row_offset + @header_rows_length][@spreadsheet.first_column].fill_color == samples_color
+      @header_rows_length = @header_rows_length + 1
     end
-    find_header_row
-    binding.pry
-    # find_data_rows
-    # @number_of_sample_columns = filter(
-    #   @data_rows.first.map { |c| c[:value] }
-    # ).length
-    # test_map
+    find_header_rows
+    find_data_rows
+    test_map
   end
 
   def find_title_rows
@@ -47,10 +42,10 @@ class Test < ApplicationRecord
     @row_offset = @title_rows.length
   end
 
-  def find_header_row
+  def find_header_rows
     header_rows = []
     i = @title_rows.length + 1
-    until i > @samples_rows_counter + @title_rows.length
+    until i > @header_rows_length + @title_rows.length
       header_rows << @spreadsheet.row(i)
       i = i + 1
     end
@@ -75,7 +70,7 @@ class Test < ApplicationRecord
 
   def find_data_rows
     rows = @spreadsheet.each_row_streaming.map { |r| r }
-    (@title_rows.length + 2..@spreadsheet.last_row).each do |i|
+    (@header_rows_length + @title_rows.length + 1..@spreadsheet.last_row).each do |i|
       data_row = remove_empty_columns(@spreadsheet.row(i))
       break if data_row.reject(&:nil?).empty?
 
@@ -105,7 +100,7 @@ class Test < ApplicationRecord
 
   def columns_map
     index_hash = Hash.new { |hash, key| hash[key] = hash[key - 1].next }.merge(0 => 'A')
-    number_of_columns = @header_row.length
+    number_of_columns = @header_rows.last.length
     columns_map = {}
     i = 0
     number_of_columns.times do
@@ -119,7 +114,7 @@ class Test < ApplicationRecord
   def test_map
     {
       titles: @title_rows,
-      header: @header_row,
+      headers: @header_rows,
       data: @data_rows,
       number_of_sample_columns: @number_of_sample_columns,
       columns_map: columns_map,
