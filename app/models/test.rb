@@ -17,7 +17,7 @@ class Test < ApplicationRecord
 
   def import(file)
     @spreadsheet = Roo::Excelx.new(file.path)
-    @column_offest = @spreadsheet.first_column - 1
+    @column_offest = @spreadsheet.first_column
     parsed_for_colors = RubyXL::Parser.parse(file.path)[0]
     find_title_rows
     samples_color = parsed_for_colors[@row_offset][@spreadsheet.first_column].fill_color
@@ -172,7 +172,7 @@ class Test < ApplicationRecord
     columns_map = {}
     i = 0
     number_of_columns.times do
-      column_letter = index_hash[i + @column_offset]
+      column_letter = index_hash[i + @column_offest]
       columns_map[column_letter] = i
       i += 1
     end
